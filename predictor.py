@@ -1,8 +1,6 @@
 import tensorflow as tf
 import numpy as np
 
-# Incluímos diretamente a definição da camada SAGE_TWO aqui
-# Alternativamente, você pode importar de model.py se preferir manter separado
 
 from tensorflow.keras.layers import (
     Dense, LayerNormalization,

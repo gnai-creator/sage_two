@@ -1,0 +1,6 @@
+build:
+  python_version: "3.9"
+  python_requirements: requirements.txt
+
+
+predict: predictor.py:Predictor
