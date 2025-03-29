@@ -1,0 +1,5 @@
+name: sage-two
+description: Camada simbólica SAGE_TWO com atenção iterativa e memória
+runtime: python3.9
+file: predictor.py
+entrypoint: Predictor
