@@ -1,4 +1,4 @@
-# 🎤 SAGE: Symbolic Adaptive General Engine — The Pitch
+# 🎤 SAGE: Symbolic Adaptive General Engine
 
 ## What if AI could truly reflect, feel, and understand meaning — not just generate text?
 
