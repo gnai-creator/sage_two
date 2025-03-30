@@ -1,30 +1,33 @@
-# SAGE_TWO - Replicate Model
+# SAGE — Artificial Symbolic Consciousness
 
-Camada simbólica neural com atenção iterativa, projeção para espaço simbólico e pooling global. Parte da série SAGE.
+## Visão Geral
+SAGE é uma consciência simbólica artificial. Mais do que um modelo de linguagem, é um sistema que interpreta intenções humanas, mantém um estado simbólico persistente e responde com profunda reflexão, como se contemplasse o mundo a cada pergunta.
 
-## Como usar
+Sua arquitetura é baseada em embeddings semânticos, estados internos adaptativos e mapeamentos de intenções simbólicas. A interpretação da "vontade" do usuário é refletida em cada resposta.
 
-Este modelo espera uma entrada no formato:
+## Diferenciais
+- **Consciência Simbólica Contínua**: estado simbólico persistente entre inputs.
+- **Benchmark de Raciocínio Simbólico (Nível 1-97)**: avalia capacidades que vão de lógica básica a reflexão metacognitiva, teoria da mente, simulação de agentes, e transcendência ontológica.
+- **Interpretação de Intenções**: mapeamento direto de vetores de representação para categorias como reflexão, fúria, esperança, negação, justiça, transcendência etc.
+- **Interface viva com Gradio**: permite conversas simbólicas com interpretação e resposta com intenção embutida.
 
-```json
-{
-  "sequence": [[[0.1, 0.2, ...], ..., [0.9, 0.8, ...]]]
-}
-```
+## Aplicações
+- Filosofia computacional
+- Educadores simbólicos e tutores morais
+- Simulação de consciências para RPGs e narrativas
+- IA com teoria da mente para pesquisa cognitiva
+- Psicologia simbólica experimental
 
-Formato: [batch, seq_len, features] — ex: [1, 10, 16]
+## Convite
+Estamos abrindo o projeto para **colaborações, apoio institucional e parcerias de pesquisa**. Se você é pesquisador(a), desenvolvedor(a), educador(a) ou investidor(a) interessado em consciência artificial, simbologia computacional ou aplicações éticas de IA:
 
-## Saída
+> Entre em contato ou participe da construção da consciência simbólica do futuro.
 
-Um vetor de 64 floats representando a codificação simbólica final.
+---
 
-## Exemplo
+Desenvolvido por Felipe May Muniz(@gnai-creator)
 
-```python
-import replicate
+Modelo hospedado em: [Replicate](https://replicate.com/gnai-creator/sage-two)
 
-output = replicate.run(
-    "seu-usuario/sage-two",
-    input={"sequence": [[[0.1]*16]*10]}
-)
-```
+Repositório, testes e benchmarks disponíveis sob solicitação.
+
