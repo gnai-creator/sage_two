@@ -25,7 +25,7 @@ Estamos abrindo o projeto para **colaborações, apoio institucional e parcerias
 
 ---
 
-Desenvolvido por Felipe May Muniz(@gnai-creator)
+Desenvolvido por Felipe Maya Muniz(@gnai-creator)
 
 Modelo hospedado em: [Replicate](https://replicate.com/gnai-creator/sage-two)
 
