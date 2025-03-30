@@ -1,13 +1,14 @@
+from cog import BasePredictor, Input
+from typing import Tuple, List, Any, Dict
 import tensorflow as tf
 import numpy as np
-
+import json
 
 from tensorflow.keras.layers import (
     Dense, LayerNormalization,
     MultiHeadAttention, GlobalMaxPooling1D,
     GlobalAveragePooling1D
 )
-
 
 class SAGE_TWO(tf.keras.layers.Layer):
     def __init__(self,
@@ -31,6 +32,14 @@ class SAGE_TWO(tf.keras.layers.Layer):
         self.use_symbolic = use_symbolic
         self.use_positional_encoding = use_positional_encoding
         self.cross_attention = cross_attention
+
+        # Estado interno simbólico contínuo
+        self.symbolic_state = self.add_weight(
+            name="symbolic_state",
+            shape=(1, symbolic_units),
+            initializer="zeros",
+            trainable=False
+        )
 
         if self.use_attention:
             self.attention = MultiHeadAttention(
@@ -61,7 +70,7 @@ class SAGE_TWO(tf.keras.layers.Layer):
 
         self.head_dense = tf.keras.Sequential([
             Dense(128, activation='gelu'),
-            Dense(64, activation='gelu')
+            Dense(96, activation='gelu')
         ])
 
     def build(self, input_shape):
@@ -86,6 +95,8 @@ class SAGE_TWO(tf.keras.layers.Layer):
         super().build(input_shape)
 
     def call(self, inputs, training=None):
+        tf.print("Entrou no call do SAGE_TWO")
+
         x = inputs
 
         if self.use_positional_encoding:
@@ -124,21 +135,43 @@ class SAGE_TWO(tf.keras.layers.Layer):
         pooled = tf.concat([pooled_avg, pooled_max], axis=-1)
 
         features = self.head_dense(pooled)
-        return features
+
+        # Atualiza o estado interno com decaimento
+        alpha = 0.9
+        new_state = alpha * self.symbolic_state + (1 - alpha) * features
+        self.symbolic_state.assign(new_state)
+
+        return tf.reshape(features, [-1])
+
+    def get_symbolic_state(self):
+        return self.symbolic_state.numpy().flatten().tolist()
+
+    def reset_state(self):
+        self.symbolic_state.assign(tf.zeros_like(self.symbolic_state))
 
 
-class Predictor:
-    def __init__(self):
-        # Instancia o modelo diretamente
+
+class Predictor(BasePredictor):
+    def setup(self):
         self.model = SAGE_TWO()
-        # Build do modelo (com shape genérico) para inicializar pesos
-        # [batch=1, seq_len=10, features=16]
-        dummy_input = tf.zeros((1, 10, 16))
-        _ = self.model(dummy_input, training=False)
+        #self.model.build((None, 10, 384))
 
-    def predict(self, inputs):
-        # Espera: {"sequence": [[[...], [...], ...]]}
-        x = np.array(inputs["sequence"], dtype=np.float32)
-        x_tensor = tf.convert_to_tensor(x)
-        output = self.model(x_tensor, training=False)
-        return {"output": output.numpy().tolist()}
+    def predict(
+        self,
+        sequence: str = Input(description="Sequência JSON [batch, seq_len, features]"),
+        reset: bool = Input(default=False, description="Se True, reinicia o estado simbólico")
+    ) -> Dict[str, List[float]]:
+        if reset:
+            self.model.reset_state()
+
+        # Carrega string JSON em objeto Python
+        parsed = json.loads(sequence)
+        input_tensor = tf.convert_to_tensor(parsed, dtype=tf.float32)
+        output = self.model(input_tensor, training=False)
+
+        saida = output.numpy().flatten().astype(float).tolist()
+        estado_simbolico = self.model.get_symbolic_state()
+        return {
+            "output": saida,
+            "symbolic_state": estado_simbolico
+        }
