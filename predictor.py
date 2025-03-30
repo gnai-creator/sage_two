@@ -74,8 +74,9 @@ class SAGE_TWO(tf.keras.layers.Layer):
         ])
 
     def build(self, input_shape):
-        self.input_dim = input_shape[-1]
-        self.seq_len = input_shape[1]
+        """Constrói pesos e inicializa camadas de acordo com o shape de entrada."""
+        self.input_dim = input_shape[-1]  # ex: 384
+        self.seq_len = input_shape[1]     # ex: 10
 
         self.memory_kernel = self.add_weight(
             name="memory_kernel",
@@ -95,15 +96,17 @@ class SAGE_TWO(tf.keras.layers.Layer):
         super().build(input_shape)
 
     def call(self, inputs, training=None):
-        tf.print("Entrou no call do SAGE_TWO")
+        tf.print("Entrou no call do SAGE_TWO...")
 
         x = inputs
 
         if self.use_positional_encoding:
+            # broadcast da pos_encoding para o batch
             pos_encoded = x + self.pos_encoding[tf.newaxis, :, :]
         else:
             pos_encoded = x
 
+        # Projeta memória
         memory_proj = tf.einsum('bsi,ij->bsj', pos_encoded, self.memory_kernel)
 
         if self.use_attention:
@@ -126,8 +129,7 @@ class SAGE_TWO(tf.keras.layers.Layer):
             symbolic = attended
 
         if self.cross_attention:
-            cross = self.cross_attn(
-                symbolic, symbolic, symbolic, training=training)
+            cross = self.cross_attn(symbolic, symbolic, symbolic, training=training)
             symbolic = self.cross_norm(symbolic + cross)
 
         pooled_avg = self.pooling_avg(symbolic)
@@ -149,12 +151,17 @@ class SAGE_TWO(tf.keras.layers.Layer):
     def reset_state(self):
         self.symbolic_state.assign(tf.zeros_like(self.symbolic_state))
 
-
+# --------------------------------------------------
+# Predictor para uso com cog ou outra interface
+# --------------------------------------------------
 
 class Predictor(BasePredictor):
     def setup(self):
         self.model = SAGE_TWO()
-        #self.model.build((None, 10, 384))
+        # Certifique-se de ajustar o shape aqui de acordo com a dimensão real do embedding
+        # e a seq_len que você usa (10 frames no seu exemplo).
+        self.model.build((None, 10, 384))
+        print("Modelo SAGE_TWO construído com sucesso.")
 
     def predict(
         self,
@@ -167,8 +174,9 @@ class Predictor(BasePredictor):
         # Carrega string JSON em objeto Python
         parsed = json.loads(sequence)
         input_tensor = tf.convert_to_tensor(parsed, dtype=tf.float32)
+        print(f"Tensor de entrada shape: {input_tensor.shape}")
+        
         output = self.model(input_tensor, training=False)
-
         saida = output.numpy().flatten().astype(float).tolist()
         estado_simbolico = self.model.get_symbolic_state()
         return {
