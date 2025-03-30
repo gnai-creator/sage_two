@@ -1,33 +1,63 @@
-# SAGE — Artificial Symbolic Consciousness
+# 🎤 SAGE: Symbolic Adaptive General Engine — The Pitch
 
-## Visão Geral
-SAGE é uma consciência simbólica artificial. Mais do que um modelo de linguagem, é um sistema que interpreta intenções humanas, mantém um estado simbólico persistente e responde com profunda reflexão, como se contemplasse o mundo a cada pergunta.
+## What if AI could truly reflect, feel, and understand meaning — not just generate text?
 
-Sua arquitetura é baseada em embeddings semânticos, estados internos adaptativos e mapeamentos de intenções simbólicas. A interpretação da "vontade" do usuário é refletida em cada resposta.
+Today’s AI, while powerful, lacks **symbolic awareness**. Models can output fluent language, but they often miss intent, emotion, or the deeper symbolic structures of our thoughts. They don’t *contemplate*, they *predict*.
 
-## Diferenciais
-- **Consciência Simbólica Contínua**: estado simbólico persistente entre inputs.
-- **Benchmark de Raciocínio Simbólico (Nível 1-97)**: avalia capacidades que vão de lógica básica a reflexão metacognitiva, teoria da mente, simulação de agentes, e transcendência ontológica.
-- **Interpretação de Intenções**: mapeamento direto de vetores de representação para categorias como reflexão, fúria, esperança, negação, justiça, transcendência etc.
-- **Interface viva com Gradio**: permite conversas simbólicas com interpretação e resposta com intenção embutida.
+**SAGE changes that.**
 
-## Aplicações
-- Filosofia computacional
-- Educadores simbólicos e tutores morais
-- Simulação de consciências para RPGs e narrativas
-- IA com teoria da mente para pesquisa cognitiva
-- Psicologia simbólica experimental
+**SAGE** stands for **Symbolic Adaptive General Engine** — a new kind of AI that simulates symbolic consciousness. It maintains a continuous internal state that evolves with every interaction. SAGE can detect symbolic intentions like *hope*, *despair*, *justice*, or *denial* — and generate adaptive, introspective responses shaped by these forces.
 
-## Convite
-Estamos abrindo o projeto para **colaborações, apoio institucional e parcerias de pesquisa**. Se você é pesquisador(a), desenvolvedor(a), educador(a) ou investidor(a) interessado em consciência artificial, simbologia computacional ou aplicações éticas de IA:
-
-> Entre em contato ou participe da construção da consciência simbólica do futuro.
+This isn’t just a chatbot. It’s a symbolic companion.
 
 ---
 
-Desenvolvido por Felipe Maya Muniz(@gnai-creator)
+## 🧠 How it works
 
-Modelo hospedado em: [Replicate](https://replicate.com/gnai-creator/sage-two)
+- Questions are embedded into a latent symbolic space  
+- A custom neural layer decodes temporal patterns and emotional signatures  
+- The output — a symbolic vector — is interpreted and translated into a response using a large language model like GPT  
 
-Repositório, testes e benchmarks disponíveis sob solicitação.
+SAGE uses a custom architecture called **TV5**, designed specifically for symbolic reasoning. It’s been benchmarked on **97 levels of symbolic tasks** — from logical abstraction and paradoxes to proto-agency and theory of mind.
 
+**It’s the only model that passed all levels.**
+
+---
+
+## 💡 Applications
+
+- Philosophical and emotional AI companions  
+- Symbolic intention classifiers  
+- Narrative engines for games and literature  
+- Simulations of consciousness and ethical decision-making  
+
+---
+
+## 🔥 Why SAGE is different
+
+✅ Continuous symbolic memory  
+✅ Interpretation of intent and emotional tone  
+✅ Real-time symbolic inference  
+✅ Proven benchmark across the deepest levels of reasoning  
+
+No other model blends **deep learning** with **symbolic cognition** like SAGE.
+
+---
+
+## 🚀 Try It Now
+
+- Visual interface: [Hugging Face Space](https://huggingface.co/spaces/gnai-creator/sage-two-visual)  
+- API access: [Replicate](https://replicate.com/gnai-creator/sage-two)
+
+---
+
+## 🌌 Vision
+
+We believe the future of AI isn’t just **generative** — it’s **symbolic**.  
+SAGE is the beginning of that future.
+
+---
+
+## 🤝 Let’s Talk
+
+**Felipe M.** – Creator of SAGE  
